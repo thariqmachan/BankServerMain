@@ -1,0 +1,200 @@
+22/08/23 (server creation)
+----------------------------------
+* proj folder de porthu new folder create chyanm
+* front end (userinterface - angular ) , backend(server(nodejs express) , database(mongoDB) )
+* SERVER - decides when to send/take data from/to frontend  
+
+TO INSTALL SERVER - 
+* npm is used  
+* package.json file should be there to install express
+* step 1: install package.json file 
+
+
+
+package.json - 
+express install
+
+1 --> npm init ( to install package.json file )
+2 --> npm i express  ( to install express )
+    to check whether is it installed , go check package.json and see express version is showed or not 
+
+3. git ignore file create 
+ we hv to create .gitignore file and include node_modules folder to avoid pushing 
+
+4. landing page creation ( index.js )
+
+
+5.  // server creation 
+    // express import 
+    
+    // 1. import express 
+    const express = require("express")
+
+    // 2. create server using express
+    const server = require()
+
+       //3. run server
+    //first set the port
+    const port=5000   // set the port no other than the frontend running port
+
+
+    //run server
+    server.listen(port,()=>{
+        console.log(`port started at port number: ${port}`);
+    })
+
+
+nodemon - used instead of node coz node doesnt hv automatic recompilation 
+        - npm i -g nodemon (globally) , nodemon index.js
+        - npm i nodemon (locally)    , npx nodemon index.js
+
+    apicall - get , post , put , patch , delete 
+
+    bank - 
+        create account      - post 
+        login               - post (more than one value)
+        balance check       - get (single value ) 
+        money trnsfer       - post 
+        account statement   - get
+        profile view        - get 
+        delete account      - delete 
+
+response - status code 
+100 - infrmation 
+200 - success
+300 - redirection 
+400 - client error
+500 - server error  
+
+
+to check whether the port is working run in thunderclient 
+https//localhost:5000/register
+        post working.....
+
+
+
+
+23-08-2023 (MVC)
+_______________________
+
+
+apicall with data
+--------------------
+data given inside body in thunderclient 
+* {
+    "acno":1000
+    "psw":"abc123"
+}
+
+calling this on login 
+server.post("/login",(req,res)=>{
+        console.log(req.body.psw);
+        res.send("login working......")
+    }) 
+
+* server.use(express.json()) --> convert json to js inorder to read 
+
+
+MVC ARCHITECTURE ( model view controles )
+------------------------------------------
+
+database - mongoDB - collections(data) - users 
+models - structure of collections 
+controllers - project logic 
+routes - apicall paths set chythekne    
+view - templatees ( frontend )
+https -->  routes ( forwards req to controllers ) --> controllers (-->http response) --> read/write data <-- models -->  <-- database  
+                          ^
+                          | (templates)
+                        view
+
+
+* models are created in a new file 
+* ethre collcton create chyunnund athrem model create chynm server il 
+* model il enth change verthuthiyaalum database il change aavum
+* database il coolections create chyum athil data add/remove chynenghil model il change chyum 
+* databse is controlled by models 
+
+
+
+
+
+
+
+database - mongoDB
+-----------------------
+
+- store datas as collections 
+- unstructured database (blank aayit kodthaalum store chyum , sql il blank space indenghi db store chyula )
+ 
+- mongosh (mongodb shell)
+
+
+-server commands
+-----------------------
+
+- find data in db collections
+    --> databaseName.collectionName.findOne({key:value}) - object - null (response)
+    --> databaseName.collectionName.find({key:value})    - array of objects - null (response)
+    --> databaseName.collectionName.find()
+
+    delete
+    --> databaseName.collectionName.deleteOne({key:value})  deleteCount 1/0
+
+
+    create
+    --> class - collection 
+                - users         new users ({acno:1000,uname:"anu",....})
+
+    -->  new collectionName({objectkeys:values})
+
+
+
+
+- save 
+        .save()
+
+
+
+- server database integration using connection string 
+-----------------------------------------------------------
+
+library - mongoose  - npm i mongoose
+
+
+
+04/09/2023
+Environmental variables
+------------------------
+variables that contain application configurations needs in run time 
+- module - process    - module that provide .env service 
+- it can convert static working of app into dynamic 
+                    (localhost running to server running)
+
+.env - local il run chyumbo mathrame env file il kodkullu variable 
+* git il push hcyaan padila .env
+
+
+* .connect - asynchronous 
+
+- dotenv - library used to import and configure .env file  
+        npm i dotenv
+
+
+
+
+
+5/9/23
+-------
+destructuring
+
+// // acno=req.body.acno
+    // const {acno}=req.body
+    // // psw=req.body.psw
+    // const {psw}=req.body
+    // // uname=req.body.uname
+    // const {uname}=req.body
+
+
+    // destructuring
+    const{acno,psw,uname}=req.body
